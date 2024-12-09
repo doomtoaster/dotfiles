@@ -1,0 +1,8 @@
+[general]
+import = [
+    "~/.config/alacritty/themes/themes/gruvbox_dark.toml"
+]
+
+[font]
+
+normal = { family = "JetbrainsMono Nerd Font", style = "Mono"}
