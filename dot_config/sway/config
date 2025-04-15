@@ -1,6 +1,7 @@
 exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK
 exec hash dbus-update-activation-environment 2>/dev/null && \
      dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK
+exec_always autotiling
 #Default config for sway
 #
 # Copy this to ~/.config/sway/config and edit it to your liking.
@@ -17,11 +18,11 @@ set $down j
 set $up k
 set $right l
 # Your preferred terminal emulator
-set $term kitty 
+set $term alacritty 
 # Your preferred application launcher
 # Note: pass the final command to swaymsg so that the resulting window can be opened
 # on the original workspace that the command was run on.
-set $menu bemenu-run
+set $menu wofi --show drun
 
 # Bildschirm Variablen
 set $home_main 'LG Electronics LG ULTRAGEAR 303MADHFJB98'
@@ -246,12 +247,20 @@ set $green "#98971a"
 set $yellow "#d79921"
 set $blue "#458588"
 set $purple "#b16286"
-set $aqua "#689d6a"
+set $aqua "#689d6a" 
 set $gray "#a89984"
 set $fg "#ebdbb2"
 set $orange "#d65d0e"
 # ----- Styling -----
 gaps inner 15
+# Remove Title Bar
+#default_border none
+#default_border normal 0
+#default_floating_border none 
+for_window [class=".*"] border pixel 1
+font pango:monospace 0.001
+titlebar_border_thickness 0
+titlebar_padding 1
 # Basic color configuration using the Base16 variables for windows and borders.
 # Property Name         Border  BG      Text    Indicator Child Border
 client.focused          $orange $bg $fg $yellow $orange
