@@ -50,7 +50,7 @@
 
   "clock": {
       "format": "{:%H:%M}",
-      "format-alt": "{:%m-%d-%Y}"
+      "format-alt": "{:%Y-%m-%d}"
   },
 
 
