@@ -256,6 +256,15 @@ require('lazy').setup({
     },
     build = ':TSUpdate',
   },
+  {
+    "ThePrimeagen/refactoring.nvim",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "nvim-treesitter/nvim-treesitter",
+    },
+    lazy = false,
+    opts = {},
+  },
 
   -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
   --       These are some example plugins that I've included in the kickstart repository.
@@ -352,7 +361,6 @@ require('telescope').setup {
     },
   },
 }
-
 -- Enable telescope fzf native, if installed
 pcall(require('telescope').load_extension, 'fzf')
 
@@ -541,33 +549,63 @@ local on_attach = function(_, bufnr)
   end, { desc = 'Format current buffer with LSP' })
 end
 
+-- refactor keybinds
+vim.keymap.set("x", "<leader>fe", ":Refactor extract ")
+vim.keymap.set("x", "<leader>ff", ":Refactor extract_to_file ")
+
+vim.keymap.set("x", "<leader>fv", ":Refactor extract_var ")
+
+vim.keymap.set({ "n", "x" }, "<leader>fi", ":Refactor inline_var")
+
+vim.keymap.set( "n", "<leader>fI", ":Refactor inline_func")
+
+vim.keymap.set("n", "<leader>fb", ":Refactor extract_block")
+vim.keymap.set("n", "<leader>fbf", ":Refactor extract_block_to_file")
+vim.keymap.set(
+	"n",
+	"<leader>fp",
+	function() require('refactoring').debug.printf({below = false}) end
+)
+
+-- Print var
+
+vim.keymap.set({"x", "n"}, "<leader>fv", function() require('refactoring').debug.print_var() end)
+-- Supports both visual and normal mode
+
+vim.keymap.set("n", "<leader>fc", function() require('refactoring').debug.cleanup({}) end)
+-- Supports only normal mode
 -- document existing key chains
 require('which-key').add {
- 
-    { "<leader>c", group = "[C]ode" },
-    { "<leader>c_", hidden = true },
-    { "<leader>d", group = "[D]ocument" },
-    { "<leader>d_", hidden = true },
-    { "<leader>g", group = "[G]it" },
-    { "<leader>g_", hidden = true },
-    { "<leader>h", group = "Git [H]unk" },
-    { "<leader>h_", hidden = true },
-    { "<leader>r", group = "[R]ename" },
-    { "<leader>r_", hidden = true },
-    { "<leader>s", group = "[S]earch" },
-    { "<leader>s_", hidden = true },
-    { "<leader>t", group = "[T]oggle" },
-    { "<leader>t_", hidden = true },
-    { "<leader>w", group = "[W]orkspace" },
-    { "<leader>w_", hidden = true },
-  }
+
+  { "<leader>c", group = "[C]ode" },
+  { "<leader>c_", hidden = true },
+  { "<leader>d", group = "[D]ocument" },
+  { "<leader>d_", hidden = true },
+  { "<leader>f", group = "re[F]actor" },
+  { "<leader>f_", hidden = true },
+  { "<leader>g", group = "[G]it" },
+  { "<leader>g_", hidden = true },
+  { "<leader>h", group = "Git [H]unk" },
+  { "<leader>h_", hidden = true },
+  { "<leader>r", group = "[R]ename" },
+  { "<leader>r_", hidden = true },
+  { "<leader>s", group = "[S]earch" },
+  { "<leader>s_", hidden = true },
+  { "<leader>t", group = "[T]oggle" },
+  { "<leader>t_", hidden = true },
+  { "<leader>w", group = "[W]orkspace" },
+  { "<leader>w_", hidden = true },
+  { "<leader>fp", desc = "printf debug"},
+  { "<leader>fv", desc = "printf debug below"},
+  { "<leader>fc", desc = "clean debug"},
+}
 -- register which-key VISUAL mode
 -- required for visual <leader>hs (hunk stage) to work
 require('which-key').add({
   -- ['<leader>'] = { name = 'VISUAL <leader>' },
   --  ['<leader>h'] = { 'Git [H]unk' },
-    { "", desc = "<leader>h", mode = "v" },
-    { "", group = "VISUAL <leader>", mode = "v" },
+  { "", desc = "<leader>h", mode = "v" },
+  { "", group = "VISUAL <leader>", mode = "v" },
 }, { mode = 'v' })
 
 -- mason-lspconfig requires that these setup functions are called in this order
