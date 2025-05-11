@@ -46,7 +46,6 @@ vim.g.maplocalleader = ' '
 vim.wo.relativenumber = true
 vim.cmd("set tabstop=4");
 vim.cmd("set shiftwidth=4");
-
 local o = vim.o
 
 o.expandtab = true
@@ -201,6 +200,7 @@ require('lazy').setup({
 
   },
 
+  { 'HiPhish/rainbow-delimiters.nvim', },
   {
     -- Set lualine as statusline
     'nvim-lualine/lualine.nvim',
@@ -327,7 +327,7 @@ vim.o.termguicolors = true
 -- Keymaps for better default experience
 -- See `:help vim.keymap.set()`
 vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
-
+vim.keymap.set('n', 'ww', ':set wrap!\n')
 -- Remap for dealing with word wrap
 vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
@@ -350,7 +350,7 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 })
 
 -- [[ Configure Telescope ]]
--- See `:help telescope` and `:help telescope.setup()`
+-- See `:help telescope` and `:help telescope.setup()
 require('telescope').setup {
   defaults = {
     mappings = {
@@ -435,6 +435,7 @@ vim.defer_fn(function()
   require('nvim-treesitter.configs').setup {
     -- Add languages to be installed here that you want installed for treesitter
     ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'tsx', 'javascript', 'typescript', 'vimdoc', 'vim', 'bash' },
+    
 
     -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
     auto_install = false,
@@ -612,7 +613,21 @@ require('which-key').add({
 -- before setting up the servers.
 require('mason').setup()
 require('mason-lspconfig').setup()
+require('rainbow-delimiters.setup').setup()
+-- custom snippets
+local luasnip = require('luasnip')
 
+-- Lazy load snippets from VSCode
+
+require("luasnip/loaders/from_vscode").lazy_load({
+
+  paths = {
+
+    vim.fn.expand("./snippets/"), -- specify the correct directory
+
+  }
+
+}) 
 -- Enable the following language servers
 --  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
 --
