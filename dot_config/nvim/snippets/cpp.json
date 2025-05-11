@@ -1,0 +1,28 @@
+{
+      "prag": {
+        "prefix": "prag",
+        "body": [
+            "#pragma once", 
+            "class ${1:MyClass} {",
+            "public:",
+            "\t$1();",
+            "\t$1($1 &&) = default;",
+            "\t$1(const $1 &) = default;",
+            "\t$1 &operator=($1 &&) = default;",
+            "\t$1 &operator=(const $1 &) = default;",
+            "\t~$1();",
+            "",
+            "private:",
+            "\t$2",
+            "};",
+            "",
+            "$1::$1() {",
+            "}",
+            "",
+            "$1::~$1() {",
+            "}"
+        ],
+        "description": "Code snippet for class"
+    }
+    
+}
