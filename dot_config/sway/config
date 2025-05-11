@@ -81,7 +81,7 @@ input * {
 
     # Kill focused window
     bindsym $mod+Shift+q kill
-
+    bindsym $mod+Shift+i exec swaylock -c 282828
     # Start your launcher
     bindsym $mod+d exec $menu
 
