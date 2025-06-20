@@ -101,7 +101,7 @@ require('lazy').setup({
       'folke/neodev.nvim',
     },
   },
-
+  'zbirenbaum/copilot.lua',
   {
     -- Autocompletion
     'hrsh7th/nvim-cmp',
@@ -327,7 +327,7 @@ vim.o.termguicolors = true
 -- Keymaps for better default experience
 -- See `:help vim.keymap.set()`
 vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
-vim.keymap.set('n', 'ww', ':set wrap!\n')
+vim.keymap.set('n', '<leader>WW', ':set wrap!\n')
 -- Remap for dealing with word wrap
 vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
@@ -614,6 +614,7 @@ require('which-key').add({
 require('mason').setup()
 require('mason-lspconfig').setup()
 require('rainbow-delimiters.setup').setup()
+require('copilot').setup({})
 -- custom snippets
 local luasnip = require('luasnip')
 
@@ -737,3 +738,6 @@ vim.opt.conceallevel = 1
 require 'lspconfig'.jdtls.setup {}
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
+
+
+
