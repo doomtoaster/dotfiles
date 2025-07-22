@@ -1,5 +1,6 @@
 # If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
+export PATH=$HOME/bin:/usr/local/bin:$PATH
+export PATH=/home/kai/.local/bin/:$PATH
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
@@ -100,6 +101,10 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias dotfiles="git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
+alias yay="paru"
+alias config="/home/kai/.config/"
+
+
 export SDL_VIDEODRIVER=wayland
 export _JAVA_AWT_WM_NONREPARENTING=1
 export QT_QPA_PLATFORM=wayland
@@ -108,4 +113,4 @@ export XDG_SESSION_DESKTOP=sway
 export _JAVA_AWT_WM_NONREPARENTING=1
 
 eval $(thefuck --alias)
-pokeshell -s sharpedo | fastfetch --file-raw -
+pokeshell poochyena | fastfetch --file-raw -
