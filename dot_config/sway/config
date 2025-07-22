@@ -30,7 +30,7 @@ set $home_second 'Ancor Communications Inc VS278 JCLMQS133678'
 ### Output configuration
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
-output * bg /home/kai/Images/Wallpaper/wallpaper.png fill
+output * bg /home/kai/Images/Wallpaper/poochy.png fill
 #
 # Turn off Display when closed
 bindswitch lid:on output eDP-1 disable    
@@ -270,3 +270,9 @@ client.urgent           $red $bg $red $yellow $red
 client.placeholder      $gray $bg1 $blue $gray $gray
 client.background       $bg
 include /etc/sway/config.d/*
+
+
+
+# WORKSPACE STANDARD APPS
+
+exec swaymsg "workspace 2; exec alacritty"

@@ -118,6 +118,13 @@ require('lazy').setup({
       'rafamadriz/friendly-snippets',
     },
   },
+  -- Copilot Completion in Suggestions
+  {
+    "zbirenbaum/copilot-cmp",
+    config = function ()
+      require("copilot_cmp").setup()
+    end
+  },
 
   -- Useful plugin to show you pending keybinds.
   { 'folke/which-key.nvim',  opts = {} },
@@ -726,6 +733,7 @@ cmp.setup {
     end, { 'i', 's' }),
   },
   sources = {
+    { name = 'copilot' }, 
     { name = 'nvim_lsp' },
     { name = 'luasnip' },
     { name = 'path' },
@@ -738,6 +746,3 @@ vim.opt.conceallevel = 1
 require 'lspconfig'.jdtls.setup {}
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
-
-
-
